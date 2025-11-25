@@ -180,7 +180,9 @@ export default function Home() {
               animate={{ x: 0, opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-2 sm:mb-3">Mukim</h1>
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-2 sm:mb-3">
+                Mahdin Islam Mukim
+              </h1>
               <p className="text-base sm:text-lg md:text-xl text-blue-400 font-medium mb-3 sm:mb-4">
                 Data Science | Robotics | Programming
               </p>
