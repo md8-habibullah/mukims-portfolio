@@ -4,14 +4,19 @@ import {
   FaEnvelope,
   FaGithub,
   FaLinkedin,
+  FaGraduationCap,
   FaMapPin,
   FaPhone,
+  FaFolder,
   FaDatabase,
   FaCode,
   FaMicrochip,
   FaWrench,
   FaArrowUpRightFromSquare,
   FaBars,
+  FaTrophy,
+  FaHeart,
+  FaBuilding,
   FaX,
 } from "react-icons/fa6"
 import { motion } from "framer-motion"
@@ -430,101 +435,206 @@ export default function Home() {
           </div>
         </div>
       </section>
-
+      {/* Achievements Section */}
       <section
         id="achievements"
-        className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8 border-t border-slate-700 relative z-10"
+        className="py-20 px-4 sm:px-6 lg:px-8 relative z-10 overflow-hidden"
       >
-        <div className="max-w-5xl mx-auto">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-6 sm:mb-8">Achievements</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
+        <div className="max-w-6xl mx-auto">
+          <div className="flex items-center gap-4 mb-8">
+            <h2 className="text-3xl sm:text-4xl font-bold text-white tracking-tight">
+              Honors & <span className="text-yellow-400">Achievements</span>
+            </h2>
+            <div className="h-px flex-1 bg-gradient-to-r from-slate-700 to-transparent" />
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {achievements.map((achievement, idx) => (
               <motion.div
                 key={idx}
-                className="p-3 sm:p-4 rounded-lg bg-slate-800/50 border border-slate-700 hover:border-blue-500/50 transition text-xs sm:text-sm md:text-base text-gray-300"
-                whileHover={{ scale: 1.02 }}
+                className="group relative p-5 rounded-xl bg-slate-900/50 border border-slate-800 hover:border-yellow-500/50 transition-all duration-300 backdrop-blur-sm"
+                whileHover={{ y: -3 }}
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.1 }}
               >
-                {achievement}
+                {/* Decorative glow on hover */}
+                <div className="absolute inset-0 bg-yellow-500/5 opacity-0 group-hover:opacity-100 transition-opacity rounded-xl" />
+
+                <div className="relative flex items-start gap-4">
+                  <div className="p-2 rounded-lg bg-yellow-500/10 text-yellow-400 flex-shrink-0 mt-1">
+                    {/* Assuming you have FaTrophy imported, if not use FaMedal or generic icon */}
+                    <FaTrophy className="text-lg" />
+                  </div>
+                  <p className="text-slate-300 text-sm sm:text-base leading-relaxed font-medium group-hover:text-white transition-colors">
+                    {achievement}
+                  </p>
+                </div>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      <section id="projects" className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8 border-t border-slate-700 relative z-10">
-        <div className="max-w-5xl mx-auto">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-6 sm:mb-8">Projects</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 mb-6 sm:mb-8">
+      {/* Projects Section */}
+      <section
+        id="projects"
+        className="py-20 px-4 sm:px-6 lg:px-8 relative z-10"
+      >
+        <div className="max-w-6xl mx-auto">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-10 gap-4">
+            <div>
+              <h2 className="text-3xl sm:text-4xl font-bold text-white mb-2">
+                Featured <span className="text-blue-500">Projects</span>
+              </h2>
+              <p className="text-slate-400">A selection of my recent technical work.</p>
+            </div>
+
+            <motion.a
+              href="https://github.com/mukimsoft"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 bg-slate-800 hover:bg-slate-700 text-white rounded-lg border border-slate-700 hover:border-slate-600 transition-all text-sm font-medium"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              <FaGithub className="text-lg" />
+              <span>View Github</span>
+            </motion.a>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
             {projects.map((project, idx) => (
               <motion.a
                 key={idx}
                 href={project.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-4 sm:p-5 rounded-lg bg-slate-800/50 border border-slate-700 hover:border-blue-500/50 transition flex flex-col h-full group"
+                className="group flex flex-col h-full p-6 rounded-2xl bg-slate-900/50 border border-slate-800 hover:border-blue-500/50 hover:bg-slate-800/80 transition-all duration-300 backdrop-blur-sm relative overflow-hidden"
                 whileHover={{ y: -5 }}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.1 }}
               >
-                <div className="flex justify-between items-start mb-3">
-                  <h3 className="font-semibold text-white text-xs sm:text-sm md:text-base group-hover:text-blue-400 transition">
+                {/* Top Row: Folder Icon & Arrow */}
+                <div className="flex justify-between items-start mb-6">
+                  <div className="p-3 rounded-lg bg-blue-500/10 text-blue-400 group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                    <FaFolder className="text-xl" />
+                  </div>
+                  <FaArrowUpRightFromSquare className="text-slate-500 group-hover:text-blue-400 transition-colors text-sm" />
+                </div>
+
+                {/* Content */}
+                <div className="flex-grow">
+                  <h3 className="text-lg font-bold text-white mb-2 group-hover:text-blue-400 transition-colors">
                     {project.name}
                   </h3>
-                  <FaArrowUpRightFromSquare className="text-blue-400 text-xs sm:text-sm flex-shrink-0" />
+                  <p className="text-sm text-slate-400 leading-relaxed mb-4 line-clamp-3">
+                    {project.description}
+                  </p>
                 </div>
-                <p className="text-xs sm:text-sm text-gray-400 mb-3 flex-grow">{project.description}</p>
-                <div className="pt-3 border-t border-slate-700">
-                  <span className="text-xs text-blue-400 font-medium">{project.language}</span>
+
+                {/* Footer: Tech Stack Badge */}
+                <div className="pt-4 border-t border-slate-700/50 flex items-center gap-2 mt-auto">
+                  <span className="px-2.5 py-1 rounded-md bg-slate-800 text-xs font-medium text-blue-300 border border-slate-700">
+                    {project.language}
+                  </span>
                 </div>
               </motion.a>
             ))}
           </div>
-          <motion.a
-            href="https://github.com/mukimsoft"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-4 sm:px-6 py-2 sm:py-3 bg-blue-600 hover:bg-blue-700 text-white text-xs sm:text-sm md:text-base rounded-lg font-medium transition"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <FaGithub className="text-base sm:text-lg" />
-            See More on GitHub
-          </motion.a>
+
+          {/* Mobile Only Github Button */}
+          <div className="text-center sm:hidden">
+            <motion.a
+              href="https://github.com/mukimsoft"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition shadow-lg shadow-blue-900/20"
+              whileTap={{ scale: 0.95 }}
+            >
+              <FaGithub className="text-xl" />
+              <span>See More on GitHub</span>
+            </motion.a>
+          </div>
         </div>
       </section>
+      {/* Education Section - Timeline Style */}
+      <section id="education" className="py-20 px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="max-w-4xl mx-auto">
+          <div className="flex items-center gap-4 mb-12">
+            <div className="p-3 rounded-lg bg-blue-600/10 text-blue-500">
+              <FaGraduationCap className="text-2xl" />
+            </div>
+            <h2 className="text-3xl sm:text-4xl font-bold text-white tracking-tight">
+              Education <span className="text-slate-500">History</span>
+            </h2>
+          </div>
 
-      <section id="education" className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8 border-t border-slate-700 relative z-10">
-        <div className="max-w-5xl mx-auto">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-6 sm:mb-8">Education</h2>
-          <div className="space-y-3 sm:space-y-4">
+          <div className="space-y-6 relative">
+            {/* Vertical Line */}
+            <div className="absolute left-4 top-4 bottom-4 w-0.5 bg-slate-800" />
+
             {[
-              { degree: "B.Sc. Computer Science", school: "Northern University Bangladesh" },
-              { degree: "H.S.C.", school: "Bhawal Badre Alam Government College" },
-              { degree: "S.S.C.", school: "B.A.R.I High School" },
+              { degree: "B.Sc. in Computer Science", school: "Northern University Bangladesh", year: "Current" },
+              { degree: "Higher Secondary (H.S.C.)", school: "Bhawal Badre Alam Government College", year: "Completed" },
+              { degree: "Secondary School (S.S.C.)", school: "B.A.R.I High School", year: "Completed" },
             ].map((edu, idx) => (
               <motion.div
                 key={idx}
-                className="p-4 sm:p-5 rounded-lg bg-slate-800/50 border border-slate-700"
-                whileHover={{ x: 5 }}
+                className="relative pl-12 sm:pl-16 group"
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.1 }}
               >
-                <p className="font-semibold text-white text-xs sm:text-sm md:text-base">{edu.degree}</p>
-                <p className="text-xs sm:text-sm text-gray-400 mt-1">{edu.school}</p>
+                {/* Timeline Dot */}
+                <div className="absolute left-2 top-3 w-4 h-4 rounded-full border-2 border-slate-700 bg-slate-900 group-hover:border-blue-500 group-hover:bg-blue-500 transition-colors duration-300 -translate-x-1/2 z-10" />
+
+                <div className="p-6 rounded-xl bg-slate-900/50 border border-slate-800 hover:border-blue-500/30 transition-all duration-300 hover:bg-slate-800/50">
+                  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2 mb-2">
+                    <h3 className="font-bold text-white text-lg group-hover:text-blue-400 transition-colors">
+                      {edu.degree}
+                    </h3>
+                    <span className="px-3 py-1 text-xs font-medium rounded-full bg-slate-800 text-slate-400 border border-slate-700 self-start sm:self-auto">
+                      {edu.year}
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-2 text-slate-400 text-sm">
+                    <FaBuilding className="text-slate-600" />
+                    {edu.school}
+                  </div>
+                </div>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      <section id="contact" className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8 border-t border-slate-700 relative z-10">
-        <div className="max-w-5xl mx-auto">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-6 sm:mb-8">Let's Connect</h2>
-          <p className="text-gray-300 mb-6 sm:mb-8 max-w-2xl text-xs sm:text-sm md:text-base">
-            I'm always open to new opportunities and conversations. Feel free to reach out through any of these
-            channels.
-          </p>
-          <motion.div className="flex flex-wrap gap-3 sm:gap-4">
+      {/* Contact Section */}
+      <section id="contact" className="py-24 px-4 sm:px-6 lg:px-8 relative z-10 bg-gradient-to-b from-transparent to-slate-900/50">
+        <div className="max-w-4xl mx-auto text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mb-10"
+          >
+            <h2 className="text-4xl sm:text-5xl font-bold text-white mb-6">
+              Let's <span className="text-blue-500">Work Together</span>
+            </h2>
+            <p className="text-slate-400 text-lg max-w-2xl mx-auto leading-relaxed">
+              I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.
+            </p>
+          </motion.div>
+
+          <div className="flex flex-wrap justify-center gap-4 sm:gap-6">
             {[
-              { icon: FaEnvelope, label: "Email", href: "mailto:mahdinmukim575@gmail.com" },
-              { icon: FaLinkedin, label: "LinkedIn", href: "https://linkedin.com/in/mahdin-islam-mukim" },
-              { icon: FaGithub, label: "GitHub", href: "https://github.com/mukimsoft" },
+              { icon: FaEnvelope, label: "Email Me", href: "mailto:mahdinmukim575@gmail.com", color: "hover:bg-red-500/10 hover:border-red-500/50 hover:text-red-400" },
+              { icon: FaLinkedin, label: "LinkedIn", href: "https://linkedin.com/in/mahdin-islam-mukim", color: "hover:bg-blue-600/10 hover:border-blue-500/50 hover:text-blue-400" },
+              { icon: FaGithub, label: "GitHub", href: "https://github.com/mukimsoft", color: "hover:bg-slate-700/50 hover:border-slate-500 hover:text-white" },
             ].map((contact, idx) => {
               const Icon = contact.icon
               return (
@@ -533,24 +643,33 @@ export default function Home() {
                   href={contact.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 sm:gap-3 px-3 sm:px-6 py-2 sm:py-3 rounded-lg bg-slate-800/50 border border-slate-700 hover:border-blue-500/50 text-white transition text-xs sm:text-sm md:text-base"
-                  whileHover={{ scale: 1.05, y: -2 }}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: idx * 0.1 }}
+                  className={`flex items-center gap-3 px-8 py-4 rounded-xl bg-slate-800/40 border border-slate-700 text-slate-300 font-semibold transition-all duration-300 ${contact.color}`}
+                  whileHover={{ scale: 1.05, y: -5 }}
+                  whileTap={{ scale: 0.95 }}
                 >
-                  <Icon className="text-blue-400 text-sm sm:text-base" />
-                  {contact.label}
+                  <Icon className="text-xl" />
+                  <span>{contact.label}</span>
                 </motion.a>
               )
             })}
-          </motion.div>
+          </div>
         </div>
       </section>
 
-      <footer className="border-t border-slate-700 py-6 sm:py-8 px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="max-w-5xl mx-auto text-center text-xs sm:text-sm text-gray-500">
-          <p>2025 Mukim. Open to opportunities and collaboration.</p>
+      {/* Footer */}
+      <footer className="py-8 px-4 border-t border-slate-800 relative z-10 bg-slate-950">
+        <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-center md:text-left">
+          <div>
+            <span className="text-lg font-bold text-white tracking-tight">Mukim<span className="text-blue-500">.</span></span>
+            <p className="text-slate-500 text-sm mt-1">Building intelligent systems for the future.</p>
+          </div>
+
+          <div className="flex flex-col items-center md:items-end gap-1">
+            <p className="text-slate-500 text-sm">
+              &copy; {new Date().getFullYear()} Mahdin Islam Mukim. All rights reserved.
+            </p>
+
+          </div>
         </div>
       </footer>
     </div>
