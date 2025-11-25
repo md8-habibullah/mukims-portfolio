@@ -50,7 +50,7 @@ const projects = [
   {
     name: "AngryBird-demo",
     description: "Game project inspired by AngryBirds",
-    language: "HTML",
+    language: "HTML, Python",
     link: "https://github.com/mukimsoft/AngryBird-demo",
   },
   {
@@ -312,7 +312,7 @@ export default function Home() {
                   </div>
                   <div>
                     <p className="text-sm font-medium text-slate-400 uppercase tracking-wider">Location</p>
-                    <p className="text-white font-medium text-lg">Gazipur, Bangladesh</p>
+                    <p className="text-white font-medium text-lg">Gazipur, Dhaka, Bangladesh</p>
                   </div>
                 </div>
               </div>
