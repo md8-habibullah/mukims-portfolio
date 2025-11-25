@@ -8,9 +8,9 @@ const _geist = Geist({ subsets: ["latin"] })
 const _geistMono = Geist_Mono({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Mahdin Islam Mukim - Data Science & Robotics",
+  title: "Mahdin Islam Mukim - Data Science, Robotics & AI",
   description:
-    "Portfolio of Mahdin Islam Mukim - Data Scientist, Roboticist, and Programmer with expertise in AI and innovative solutions.",
+    "Portfolio of Mahdin Islam Mukim - Data Scientist, Roboticist, AI Developer, and Programmer. Specializing in intelligent systems, robotics, and innovative tech solutions.",
   generator: "v0.app",
   icons: {
     icon: [
@@ -37,7 +37,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="dark scroll-smooth">
       <body className={`font-sans antialiased`}>
         {children}
         <Analytics />
