@@ -270,6 +270,9 @@ export default function Home() {
               { degree: "B.Sc. in Computer Science", school: "Northern University Bangladesh" },
               { degree: "Higher Secondary Certificate", school: "Bhawal Badre Alam Government College" },
               { degree: "Secondary School Certificate", school: "B.A.R.I High School" },
+              { degree: "Secondary School Certificate", school: "B.A.R.I High School" },
+              { degree: "Secondary School Certificate", school: "B.A.R.I High School" },
+
             ].map((edu, idx) => (
               <motion.div
                 key={idx}
