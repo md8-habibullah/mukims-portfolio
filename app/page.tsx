@@ -10,14 +10,65 @@ import {
   FaCode,
   FaMicrochip,
   FaWrench,
+  FaArrowUpRightFromSquare,
 } from "react-icons/fa6"
-import { motion, useInView } from "framer-motion"
-import { useRef, useState, useEffect } from "react"
+import { motion } from "framer-motion"
+import { useState, useEffect } from "react"
+
+const projects = [
+  {
+    name: "Hepatitis-C-Prediction",
+    description: "ML project for hepatitis C prediction using data analysis",
+    language: "Jupyter Notebook",
+    link: "https://github.com/mukimsoft/Project-1_Hepatitis-C-Prediction",
+  },
+  {
+    name: "Jenkins",
+    description: "Automation and CI/CD pipeline project",
+    language: "Shell",
+    link: "https://github.com/mukimsoft/jenkins",
+  },
+  {
+    name: "word_raider",
+    description: "Python-based word game project",
+    language: "Python",
+    link: "https://github.com/mukimsoft/word_raider",
+  },
+  {
+    name: "Business-Automation-Ltd",
+    description: "Business automation and management system",
+    language: "JavaScript",
+    link: "https://github.com/mukimsoft/Business-Automation-Ltd",
+  },
+  {
+    name: "AngryBird-demo",
+    description: "Game project inspired by AngryBirds",
+    language: "HTML",
+    link: "https://github.com/mukimsoft/AngryBird-demo",
+  },
+  {
+    name: "Quiz-Game-mrm-in-C",
+    description: "Interactive quiz game built in C",
+    language: "C",
+    link: "https://github.com/mukimsoft/Quiz-Game-mrm-in-C",
+  },
+]
+
+const achievements = [
+  "Bronze Medalist - World Innovation Competition 2025",
+  "2nd Runner-Up - NUB CSE Day Project Showcase 2023",
+  "National Robotics Competition Participant",
+  "NASA Apps Challenge Hackathon Participant",
+  "Vice President - NUB Computer Club",
+  "Campus Representative - World Innovation Competition",
+]
 
 export default function Home() {
   const [localTime, setLocalTime] = useState("")
+  const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
+    setMounted(true)
     const updateTime = () => {
       const now = new Date()
       const bdTime = new Date(now.toLocaleString("en-US", { timeZone: "Asia/Dhaka" }))
@@ -28,25 +79,10 @@ export default function Home() {
     return () => clearInterval(interval)
   }, [])
 
-  const ScrollReveal = ({ children, delay = 0 }) => {
-    const ref = useRef(null)
-    const isInView = useInView(ref, { once: true, margin: "-50px" })
-
-    return (
-      <motion.div
-        ref={ref}
-        initial={{ opacity: 0, y: 30 }}
-        animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-        transition={{ duration: 0.5, delay }}
-      >
-        {children}
-      </motion.div>
-    )
-  }
+  if (!mounted) return null
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-gray-100">
-      {/* Animated background */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden">
         <motion.div
           className="absolute top-10 left-10 w-72 h-72 bg-blue-500/5 rounded-full blur-3xl"
@@ -69,14 +105,14 @@ export default function Home() {
       >
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
           <motion.div className="text-lg font-semibold text-white" whileHover={{ scale: 1.05 }}>
-            Mahdin Islam
+            Mahdin
           </motion.div>
-          <div className="flex gap-6 text-sm md:text-base">
-            {["Home", "About", "Skills", "Projects", "Contact"].map((item) => (
+          <div className="flex gap-4 md:gap-6 text-xs md:text-sm overflow-x-auto">
+            {["Home", "About", "Skills", "Achievements", "Projects", "Education", "Contact"].map((item) => (
               <motion.a
                 key={item}
                 href={`#${item.toLowerCase()}`}
-                className="text-gray-300 hover:text-blue-400 transition"
+                className="text-gray-300 hover:text-blue-400 transition whitespace-nowrap"
                 whileHover={{ scale: 1.05 }}
               >
                 {item}
@@ -87,7 +123,7 @@ export default function Home() {
       </motion.nav>
 
       {/* Hero Section */}
-      <section id="home" className="pt-32 pb-20 px-4 sm:px-6 lg:px-8 relative z-10">
+      <section id="home" className="pt-32 pb-16 px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="max-w-5xl mx-auto">
           <motion.div
             className="flex flex-col md:flex-row items-center gap-8 md:gap-16"
@@ -117,7 +153,7 @@ export default function Home() {
               transition={{ duration: 0.6, delay: 0.2 }}
             >
               <h1 className="text-4xl md:text-5xl font-bold text-white mb-3">Mahdin Islam Mukim</h1>
-              <p className="text-xl text-blue-400 font-medium mb-4">Data Science | Robotics | Programming</p>
+              <p className="text-lg md:text-xl text-blue-400 font-medium mb-4">Data Science | Robotics | Programming</p>
               <p className="text-gray-300 text-base leading-relaxed mb-6">
                 CSE student passionate about data-driven solutions and robotics. Focused on building intelligent systems
                 and contributing to innovative projects with technical excellence and teamwork.
@@ -135,13 +171,13 @@ export default function Home() {
 
           {/* Time Display */}
           <motion.div
-            className="mt-12 p-4 rounded-lg bg-slate-800/50 border border-slate-700 text-center max-w-sm mx-auto md:mx-0"
+            className="mt-12 p-4 rounded-lg bg-slate-800/50 border border-slate-700 text-center max-w-xs mx-auto"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.4 }}
           >
-            <p className="text-gray-400 text-sm">Local Time (BDT +6:00)</p>
-            <p className="text-2xl font-mono font-semibold text-blue-400">{localTime}</p>
+            <p className="text-gray-400 text-xs md:text-sm">Local Time (BDT +6:00)</p>
+            <p className="text-xl md:text-2xl font-mono font-semibold text-blue-400">{localTime || "Loading..."}</p>
           </motion.div>
         </div>
       </section>
@@ -149,51 +185,45 @@ export default function Home() {
       {/* About Section */}
       <section id="about" className="py-16 px-4 sm:px-6 lg:px-8 border-t border-slate-700 relative z-10">
         <div className="max-w-5xl mx-auto">
-          <ScrollReveal>
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-8">About Me</h2>
-          </ScrollReveal>
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-8">About Me</h2>
           <div className="grid md:grid-cols-2 gap-8">
-            <ScrollReveal delay={0.1}>
-              <div className="space-y-4 text-gray-300 leading-relaxed">
-                <p>
-                  I'm a Computer Science student at Northern University Bangladesh with a strong passion for data
-                  science and robotics. I believe in continuous learning and applying technical knowledge to solve
-                  real-world problems.
-                </p>
-                <p>
-                  My journey includes participation in robotics competitions, innovation summits, and hackathons. I
-                  value teamwork, leadership, and creative problem-solving.
-                </p>
-                <p className="text-blue-400 font-medium">
-                  Currently exploring: Advanced Data Analysis, Embedded Systems, and AI Applications
-                </p>
-              </div>
-            </ScrollReveal>
-            <ScrollReveal delay={0.2}>
-              <div className="space-y-3">
-                <div className="flex items-start gap-4 p-4 rounded-lg bg-slate-800/50 border border-slate-700">
-                  <FaMapPin className="text-blue-400 flex-shrink-0 mt-1" />
-                  <div>
-                    <p className="font-medium text-white">Location</p>
-                    <p className="text-sm text-gray-400">Gazipur, Bangladesh</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-4 p-4 rounded-lg bg-slate-800/50 border border-slate-700">
-                  <FaPhone className="text-blue-400 flex-shrink-0 mt-1" />
-                  <div>
-                    <p className="font-medium text-white">Phone</p>
-                    <p className="text-sm text-gray-400">+8801832544953</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-4 p-4 rounded-lg bg-slate-800/50 border border-slate-700">
-                  <FaEnvelope className="text-blue-400 flex-shrink-0 mt-1" />
-                  <div>
-                    <p className="font-medium text-white">Email</p>
-                    <p className="text-sm text-gray-400">mahdinmukim575@gmail.com</p>
-                  </div>
+            <div className="space-y-4 text-gray-300 leading-relaxed text-sm md:text-base">
+              <p>
+                I'm a Computer Science student at Northern University Bangladesh with a strong passion for data science
+                and robotics. I believe in continuous learning and applying technical knowledge to solve real-world
+                problems.
+              </p>
+              <p>
+                My journey includes participation in robotics competitions, innovation summits, and hackathons. I value
+                teamwork, leadership, and creative problem-solving.
+              </p>
+              <p className="text-blue-400 font-medium">
+                Currently exploring: Advanced Data Analysis, Embedded Systems, and AI Applications
+              </p>
+            </div>
+            <div className="space-y-3">
+              <div className="flex items-start gap-4 p-4 rounded-lg bg-slate-800/50 border border-slate-700">
+                <FaMapPin className="text-blue-400 flex-shrink-0 mt-1 text-lg md:text-xl" />
+                <div>
+                  <p className="font-medium text-white text-sm md:text-base">Location</p>
+                  <p className="text-xs md:text-sm text-gray-400">Gazipur, Bangladesh</p>
                 </div>
               </div>
-            </ScrollReveal>
+              <div className="flex items-start gap-4 p-4 rounded-lg bg-slate-800/50 border border-slate-700">
+                <FaPhone className="text-blue-400 flex-shrink-0 mt-1 text-lg md:text-xl" />
+                <div>
+                  <p className="font-medium text-white text-sm md:text-base">Phone</p>
+                  <p className="text-xs md:text-sm text-gray-400">+8801832544953</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-4 p-4 rounded-lg bg-slate-800/50 border border-slate-700">
+                <FaEnvelope className="text-blue-400 flex-shrink-0 mt-1 text-lg md:text-xl" />
+                <div>
+                  <p className="font-medium text-white text-sm md:text-base">Email</p>
+                  <p className="text-xs md:text-sm text-gray-400">mahdinmukim575@gmail.com</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -201,87 +231,114 @@ export default function Home() {
       {/* Skills Section */}
       <section id="skills" className="py-16 px-4 sm:px-6 lg:px-8 border-t border-slate-700 relative z-10">
         <div className="max-w-5xl mx-auto">
-          <ScrollReveal>
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-8">Skills</h2>
-          </ScrollReveal>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-8">Skills</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {[
               { icon: FaDatabase, title: "Data Science", skills: ["Python", "SQL", "Pandas", "NumPy"] },
               { icon: FaCode, title: "Programming", skills: ["C", "C++", "Python", "React"] },
               { icon: FaMicrochip, title: "Robotics", skills: ["Arduino", "Raspberry Pi", "IoT", "Sensors"] },
-              { icon: FaWrench, title: "Tools", skills: ["Figma", "Excel", "Git", "Canva"] },
+              { icon: FaWrench, title: "Tools", skills: ["Figma", "Excel", "Git", "Power BI"] },
             ].map((skill, idx) => {
               const Icon = skill.icon
               return (
-                <ScrollReveal key={idx} delay={idx * 0.1}>
-                  <motion.div
-                    className="p-6 rounded-lg bg-slate-800/50 border border-slate-700 hover:border-blue-500/50 transition"
-                    whileHover={{ y: -5 }}
-                  >
-                    <Icon className="text-blue-400 text-3xl mb-3" />
-                    <h3 className="font-semibold text-white mb-3">{skill.title}</h3>
-                    <ul className="space-y-1">
-                      {skill.skills.map((s, i) => (
-                        <li key={i} className="text-sm text-gray-400">
-                          {s}
-                        </li>
-                      ))}
-                    </ul>
-                  </motion.div>
-                </ScrollReveal>
+                <motion.div
+                  key={idx}
+                  className="p-6 rounded-lg bg-slate-800/50 border border-slate-700 hover:border-blue-500/50 transition"
+                  whileHover={{ y: -5 }}
+                >
+                  <Icon className="text-blue-400 text-2xl md:text-3xl mb-3" />
+                  <h3 className="font-semibold text-white mb-3 text-sm md:text-base">{skill.title}</h3>
+                  <ul className="space-y-1">
+                    {skill.skills.map((s, i) => (
+                      <li key={i} className="text-xs md:text-sm text-gray-400">
+                        {s}
+                      </li>
+                    ))}
+                  </ul>
+                </motion.div>
               )
             })}
           </div>
         </div>
       </section>
 
-      {/* Projects & Achievements */}
-      <section id="projects" className="py-16 px-4 sm:px-6 lg:px-8 border-t border-slate-700 relative z-10">
+      {/* Achievements Section */}
+      <section id="achievements" className="py-16 px-4 sm:px-6 lg:px-8 border-t border-slate-700 relative z-10">
         <div className="max-w-5xl mx-auto">
-          <ScrollReveal>
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-8">Achievements & Activities</h2>
-          </ScrollReveal>
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-8">Achievements</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {[
-              { title: "Bronze Medalist", desc: "World Innovation Competition 2025" },
-              { title: "2nd Runner-Up", desc: "NUB CSE Day Project Showcase 2023" },
-              { title: "Vice President", desc: "NUB Computer Club" },
-              { title: "Competition Experience", desc: "National Robotics, WRO, NASA Apps Challenge" },
-              { title: "Campus Leadership", desc: "Joint Secretary - NUBCC & Central Social Welfare" },
-              { title: "Tech Community", desc: "BASIS Student Forum Member, Campus Representative" },
-            ].map((item, idx) => (
-              <ScrollReveal key={idx} delay={idx * 0.08}>
-                <motion.div
-                  className="p-5 rounded-lg bg-slate-800/50 border border-slate-700 hover:border-blue-500/50 transition"
-                  whileHover={{ scale: 1.02 }}
-                >
-                  <p className="font-semibold text-blue-400 mb-2">{item.title}</p>
-                  <p className="text-sm text-gray-400">{item.desc}</p>
-                </motion.div>
-              </ScrollReveal>
+            {achievements.map((achievement, idx) => (
+              <motion.div
+                key={idx}
+                className="p-4 rounded-lg bg-slate-800/50 border border-slate-700 hover:border-blue-500/50 transition text-sm md:text-base text-gray-300"
+                whileHover={{ scale: 1.02 }}
+              >
+                {achievement}
+              </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Education Section */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8 border-t border-slate-700 relative z-10">
+      {/* Projects Section */}
+      <section id="projects" className="py-16 px-4 sm:px-6 lg:px-8 border-t border-slate-700 relative z-10">
         <div className="max-w-5xl mx-auto">
-          <ScrollReveal>
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-8">Education</h2>
-          </ScrollReveal>
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-8">Projects</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+            {projects.map((project, idx) => (
+              <motion.a
+                key={idx}
+                href={project.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-5 rounded-lg bg-slate-800/50 border border-slate-700 hover:border-blue-500/50 transition flex flex-col h-full group"
+                whileHover={{ y: -5 }}
+              >
+                <div className="flex justify-between items-start mb-3">
+                  <h3 className="font-semibold text-white text-sm md:text-base group-hover:text-blue-400 transition">
+                    {project.name}
+                  </h3>
+                  <FaArrowUpRightFromSquare className="text-blue-400 text-xs md:text-sm flex-shrink-0" />
+                </div>
+                <p className="text-xs md:text-sm text-gray-400 mb-3 flex-grow">{project.description}</p>
+                <div className="pt-3 border-t border-slate-700">
+                  <span className="text-xs text-blue-400 font-medium">{project.language}</span>
+                </div>
+              </motion.a>
+            ))}
+          </div>
+          <motion.a
+            href="https://github.com/mukimsoft"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <FaGithub className="text-lg" />
+            See More on GitHub
+          </motion.a>
+        </div>
+      </section>
+
+      {/* Education Section */}
+      <section id="education" className="py-16 px-4 sm:px-6 lg:px-8 border-t border-slate-700 relative z-10">
+        <div className="max-w-5xl mx-auto">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-8">Education</h2>
           <div className="space-y-4">
             {[
               { degree: "B.Sc. Computer Science", school: "Northern University Bangladesh" },
               { degree: "H.S.C.", school: "Bhawal Badre Alam Government College" },
               { degree: "S.S.C.", school: "B.A.R.I High School" },
             ].map((edu, idx) => (
-              <ScrollReveal key={idx} delay={idx * 0.1}>
-                <motion.div className="p-5 rounded-lg bg-slate-800/50 border border-slate-700" whileHover={{ x: 5 }}>
-                  <p className="font-semibold text-white">{edu.degree}</p>
-                  <p className="text-sm text-gray-400 mt-1">{edu.school}</p>
-                </motion.div>
-              </ScrollReveal>
+              <motion.div
+                key={idx}
+                className="p-5 rounded-lg bg-slate-800/50 border border-slate-700"
+                whileHover={{ x: 5 }}
+              >
+                <p className="font-semibold text-white text-sm md:text-base">{edu.degree}</p>
+                <p className="text-xs md:text-sm text-gray-400 mt-1">{edu.school}</p>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -290,15 +347,11 @@ export default function Home() {
       {/* Contact Section */}
       <section id="contact" className="py-16 px-4 sm:px-6 lg:px-8 border-t border-slate-700 relative z-10">
         <div className="max-w-5xl mx-auto">
-          <ScrollReveal>
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-8">Let's Connect</h2>
-          </ScrollReveal>
-          <ScrollReveal delay={0.1}>
-            <p className="text-gray-300 mb-8 max-w-2xl">
-              I'm always open to new opportunities and conversations. Feel free to reach out through any of these
-              channels.
-            </p>
-          </ScrollReveal>
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-8">Let's Connect</h2>
+          <p className="text-gray-300 mb-8 max-w-2xl text-sm md:text-base">
+            I'm always open to new opportunities and conversations. Feel free to reach out through any of these
+            channels.
+          </p>
           <motion.div className="flex flex-wrap gap-4">
             {[
               { icon: FaEnvelope, label: "Email", href: "mailto:mahdinmukim575@gmail.com" },
@@ -306,21 +359,20 @@ export default function Home() {
               { icon: FaGithub, label: "GitHub", href: "https://github.com/mukimsoft" },
             ].map((contact, idx) => {
               const Icon = contact.icon
-              const label = contact.label
               return (
                 <motion.a
                   key={idx}
                   href={contact.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-3 px-6 py-3 rounded-lg bg-slate-800/50 border border-slate-700 hover:border-blue-500/50 text-white transition"
+                  className="flex items-center gap-3 px-6 py-3 rounded-lg bg-slate-800/50 border border-slate-700 hover:border-blue-500/50 text-white transition text-sm md:text-base"
                   whileHover={{ scale: 1.05, y: -2 }}
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: idx * 0.1 }}
                 >
                   <Icon className="text-blue-400" />
-                  {label}
+                  {contact.label}
                 </motion.a>
               )
             })}
@@ -330,7 +382,7 @@ export default function Home() {
 
       {/* Footer */}
       <footer className="border-t border-slate-700 py-8 px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="max-w-5xl mx-auto text-center text-sm text-gray-500">
+        <div className="max-w-5xl mx-auto text-center text-xs md:text-sm text-gray-500">
           <p>2025 Mahdin Islam Mukim. Open to opportunities and collaboration.</p>
         </div>
       </footer>
